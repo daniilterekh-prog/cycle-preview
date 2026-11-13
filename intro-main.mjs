@@ -22,18 +22,19 @@ function ensurePencil(){
 }
 const profileName=()=>innerWidth<=700?'mobile':'desktop';
 function setStage(id){
+ if(root.dataset.stage===id)return;
  root.dataset.stage=id;phase.textContent=id==='strategy'?'Strategy — первый замысел':stageForFrame(state.frame).phase;
  document.querySelector('.camera-label').textContent=id==='final'?'FINAL / CAMERA PULLBACK':'ONE PERSPECTIVE';
  canvas.setAttribute('aria-label',id==='strategy'?'Архитектурный карандашный скетч Kagawa: открытая терраса, наружная лестница и два уровня башенки':'Строительство Kagawa: фасад, двор, свет в окнах и отдаление только в финале');
  panels.forEach(panel=>{const visible=panel.dataset.panel===id;panel.classList.toggle('active',visible);panel.inert=!visible;panel.setAttribute('aria-hidden',String(!visible));});
 }
 function present(){
- if(!active)return;const image=loader?.frames.get(state.frame);if(!image)return;
- renderer.draw(image,state.frame);canvas.style.opacity=String(solidOpacity(state,state.frame));error.hidden=true;root.dataset.frame=String(state.frame);root.dataset.cached=String(loader.frames.size);root.dataset.profile=profile;
+ if(!active)return;const stage=stageForFrame(state.frame),ready=loader?.nearest(state.frame,renderer.last,{min:stage.start,max:stage.end});if(!ready)return;
+ renderer.draw(ready.image,ready.index);canvas.style.opacity=String(solidOpacity(state,ready.index));error.hidden=true;root.dataset.frame=String(ready.index);root.dataset.cached=String(loader.frames.size);root.dataset.profile=profile;
 }
 function setProfile(){
  const next=profileName();if(profile===next&&loader)return;loader?.close();aborter?.abort();aborter=new AbortController();profile=next;const signal=aborter.signal;renderer.last=-1;requested=-1;
- loader=new FrameLoader({count:manifest.count,limit:next==='mobile'?7:5,decode:index=>decodeFrame(manifest.profiles[next].frames[index].file,signal),release:image=>{if(image.close)image.close();else image.src='';},onReady:present,onError:(_,index)=>{if(!signal.aborted&&index===state.frame&&state.stage!=='strategy')error.hidden=false;}});
+ loader=new FrameLoader({count:manifest.count,limit:next==='mobile'?16:12,decode:(index,frameSignal)=>decodeFrame(manifest.profiles[next].frames[index].file,frameSignal),release:image=>{if(image.close)image.close();else image.src='';},onReady:present,onError:(_,index)=>{if(!signal.aborted&&index===state.frame&&state.stage!=='strategy')error.hidden=false;}});
 }
 function update(value){
  if(!active)return;journeyProgress=Math.max(0,Math.min(1,Number(value)||0));const parts=splitProgress(journeyProgress);entryProgress=parts.entry;entry.update(entryProgress);state=storyState(parts.story);root.dataset.journey=journeyProgress.toFixed(5);slider.value=String(Math.round(state.progress*1000));root.dataset.progress=state.progress.toFixed(4);
