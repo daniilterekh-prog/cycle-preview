@@ -13,14 +13,21 @@ export class BuildingCanvas{
   this.ctx.drawImage(image,(w-iw)/2,(h-ih)/2,iw,ih);this.last=index;this.canvas.classList.add('ready');
  }
 }
-export async function decodeFrame(url,signal){
+export async function fetchFrameBlob(url,signal){
  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),12000),abort=()=>controller.abort();
  signal.addEventListener('abort',abort,{once:true});if(signal.aborted)controller.abort();
  try{
   const response=await fetch(url,{signal:controller.signal});if(!response.ok)throw Error(`Frame unavailable (${response.status})`);
-  const blob=await response.blob();
-  if(typeof createImageBitmap==='function')try{return await createImageBitmap(blob);}catch{/* Safari image decoder fallback. */}
-  const objectURL=URL.createObjectURL(blob),image=new Image();
-  try{image.src=objectURL;await image.decode();return image;}finally{URL.revokeObjectURL(objectURL);}
+  return await response.blob();
  }finally{clearTimeout(timeout);signal.removeEventListener('abort',abort);}
 }
+export async function decodeBlob(blob,signal){
+ if(signal.aborted)throw new DOMException('Cancelled','AbortError');
+ if(typeof createImageBitmap==='function'){
+  let bitmap;try{bitmap=await createImageBitmap(blob);}catch{/* Safari decoder fallback. */}
+  if(bitmap){if(signal.aborted){bitmap.close();throw new DOMException('Cancelled','AbortError');}return bitmap;}
+ }
+ const objectURL=URL.createObjectURL(blob),image=new Image();
+ try{image.src=objectURL;await image.decode();if(signal.aborted){image.src='';throw new DOMException('Cancelled','AbortError');}return image;}finally{URL.revokeObjectURL(objectURL);}
+}
+export async function decodeFrame(url,signal){return decodeBlob(await fetchFrameBlob(url,signal),signal);}
