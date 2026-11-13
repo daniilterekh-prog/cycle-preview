@@ -6,5 +6,6 @@ export function splitProgress(value){const p=clamp(value);return {entry:clamp(p/
 export const joinStory=story=>ENTRY_SHARE+(1-ENTRY_SHARE)*clamp(story);
 export function entryVisuals(value){
  const p=clamp(value);
- return {fade:ramp(p,.06,.66),nav:ramp(p,.50,.90),copy:ramp(p,.66,1),scene:ramp(p,.68,1),ink:.012*ramp(p,.68,1)};
+ // A longer dissolve gently overlaps Strategy's arrival, avoiding a blank beat.
+ return {fade:ramp(p,0,.80),nav:ramp(p,.46,.96),copy:ramp(p,.50,1),scene:ramp(p,.54,1),ink:.012*ramp(p,.54,1)};
 }
