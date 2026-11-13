@@ -1,0 +1,12 @@
+/* One stationary opening scene, driven by the same native scroll playhead. */
+.entry-enhanced .hero{position:fixed;inset:0;height:100svh;z-index:30;pointer-events:none;background:transparent;overflow:visible}
+.entry-enhanced .hero h1{transform-origin:0 0;will-change:transform;outline:none}
+.entry-enhanced .site-header{position:fixed;left:0;right:0;top:0;opacity:var(--entry-nav,0);pointer-events:auto}
+.entry-enhanced .site-header[inert]{pointer-events:none}
+.entry-enhanced .site-header .logo img{opacity:var(--entry-handoff,0)}
+.entry-enhanced.animated .experience{height:1769svh}
+.entry-enhanced .experience .copy{opacity:var(--entry-copy,0);transform:translate3d(0,var(--entry-lift,12px),0)}
+.entry-enhanced .experience .scene{opacity:var(--entry-scene,0)}
+.entry-enhanced .experience .controls{opacity:var(--entry-copy,0)}
+.entry-enhanced .viewport[inert]{pointer-events:none}
+.entry-enhanced .hero~.skip{z-index:50}
