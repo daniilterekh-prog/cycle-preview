@@ -80,3 +80,11 @@ body{-webkit-font-smoothing:antialiased}a,button{touch-action:manipulation}
 .scene>.poster,.scene>canvas,.scene>.sketch-layer{height:calc(100% - 28px)}
 .scene figcaption{bottom:0}
 .case-art-label{background:inherit;padding-right:8px}
+/* Engagement formats replace the repeated service cards in About CYCLE. */
+.page-section[hidden]{display:none}
+.engagement-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:7vw;margin:50px 0 20px}
+.engagement-grid article{border-top:1px solid var(--line);padding:26px 0}
+.engagement-grid h3{font-size:23px;font-weight:400;letter-spacing:-.035em;line-height:1.25;margin:0 0 16px}
+.engagement-grid p{font-size:14px;line-height:1.8;color:var(--muted);max-width:390px;margin:0}
+@media(max-width:900px){.engagement-grid{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:700px){.engagement-grid{grid-template-columns:1fr;gap:0;margin:30px 0 12px}.engagement-grid article{padding:24px 0}.engagement-grid h3{font-size:21px}.engagement-grid p{font-size:14px}}
