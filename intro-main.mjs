@@ -7,13 +7,13 @@ import {createScrollTimeline} from './scroll-timeline.mjs';
 import {stageForFrame} from './stages.mjs';
 import {storyState,progressForFrame,solidOpacity} from './intro-timeline.mjs?v=encoded-buffer-2';
 import {PencilCanvas} from './pencil-canvas.mjs';
-const root=document.documentElement,experience=document.querySelector('.experience'),canvas=document.querySelector('canvas'),poster=document.querySelector('.poster'),sketch=document.querySelector('.sketch-layer'),controls=document.querySelector('.controls'),slider=document.querySelector('#scrubber'),frameOutput=document.querySelector('#frame'),phase=document.querySelector('.phase'),error=document.querySelector('.error'),enable=document.querySelector('.enable');
-const renderer=new BuildingCanvas(canvas),reduce=matchMedia('(prefers-reduced-motion:reduce)'),shortLandscape=matchMedia('(orientation:landscape) and (max-height:450px)');
+const root=document.documentElement,experience=document.querySelector('.experience'),canvas=document.querySelector('canvas'),poster=document.querySelector('.poster'),sketch=document.querySelector('.sketch-layer'),controls=document.querySelector('.controls'),slider=document.querySelector('#scrubber'),frameOutput=document.querySelector('#frame'),phase=document.querySelector('.phase'),error=document.querySelector('.error');
+const renderer=new BuildingCanvas(canvas);
 const panels=[...document.querySelectorAll('[data-panel]')];
-let manifest,loader,aborter,timeline,profile,active=false,override=false,requested=-1,state=storyState(0),resizeRAF=0,end=0;
+let manifest,loader,aborter,timeline,profile,active=false,requested=-1,state=storyState(0),resizeRAF=0,end=0;
 let pencil,pencilPromise,journeyProgress=0,entryProgress=0;
 let encoded;
-root.dataset.playerBuild='encoded-buffer-2';
+root.dataset.playerBuild='always-animated-1';
 const entry=createEntryTransition();
 function drawPencil(){if(active&&pencil&&state.sketch>0)pencil.draw(Math.max(state.draw,entryVisuals(entryProgress).ink));}
 function ensurePencil(){
@@ -61,19 +61,15 @@ function deactivate(){
  entry.destroy();root.classList.remove('animated');controls.hidden=true;poster.style.visibility='';canvas.classList.remove('ready');canvas.style.opacity='0';sketch.style.opacity='0';error.hidden=true;setStage('strategy');
 }
 function activate(){
- enable.hidden=!(reduce.matches&&!override)||shortLandscape.matches;
- if((reduce.matches&&!override)||shortLandscape.matches){deactivate();return;}
  if(active)return;active=true;root.classList.add('animated');entry.activate();controls.hidden=false;if(!pencil&&!pencilPromise)sketch.classList.add('pencil-loading');
- try{timeline=createScrollTimeline(experience,update);end=experience.offsetTop+experience.offsetHeight-innerHeight;update(Math.max(0,(scrollY-experience.offsetTop)/(end-experience.offsetTop)));}catch{deactivate();}
+ try{timeline=createScrollTimeline(experience,update);end=experience.offsetTop+experience.offsetHeight-innerHeight;update(Math.max(0,(scrollY-experience.offsetTop)/(end-experience.offsetTop)));}catch(reason){deactivate();throw reason;}
 }
 slider.addEventListener('input',()=>timeline?.go(joinStory(Number(slider.value)/1000)));
 document.querySelectorAll('[data-seek]').forEach(button=>button.addEventListener('click',()=>timeline?.go(joinStory(button.dataset.seek==='strategy'?0:progressForFrame(Number(button.dataset.seek))))));
-document.querySelector('.retry').addEventListener('click',()=>{error.hidden=true;loader?.request(state.frame);});
-enable.addEventListener('click',()=>{override=true;activate();timeline?.go(0);});
-reduce.addEventListener('change',()=>{override=false;activate();});shortLandscape.addEventListener('change',activate);
+document.querySelector('.retry').addEventListener('click',()=>{if(!active){location.reload();return;}error.hidden=true;loader?.request(state.frame);});
 addEventListener('resize',()=>{const saved=scrollY>=experience.offsetTop-1&&scrollY<=end+1?journeyProgress:null,requestedY=scrollY;cancelAnimationFrame(resizeRAF);resizeRAF=requestAnimationFrame(()=>{if(!active)return;if(loader)setProfile();entry.refresh();timeline.refresh();end=experience.offsetTop+experience.offsetHeight-innerHeight;if(saved!==null&&Math.abs(scrollY-requestedY)<2)timeline.go(saved);else update(Math.max(0,(scrollY-experience.offsetTop)/(end-experience.offsetTop)));});});
 addEventListener('pagehide',()=>{loader?.close();encoded?.close();aborter?.abort();loader=null;profile=null;pencil?.release();});
 addEventListener('pageshow',()=>{if(active){entry.refresh();timeline?.refresh();update(journeyProgress);}});
 for(const link of document.querySelectorAll('a[href="#hero"],.site-header a[href="#top"]'))link.addEventListener('click',event=>{if(!active)return;event.preventDefault();const hero=link.hash==='#hero';timeline.go(hero?0:joinStory(0));history.replaceState(history.state,'',link.hash);if(hero)entry.focusHero();});
 try{const response=await fetch('sequence.json');if(!response.ok)throw Error('Manifest unavailable');manifest=await response.json();if(manifest.count!==240||!manifest.profiles[profileName()])throw Error('Invalid manifest');activate();if(active&&location.hash){requestAnimationFrame(()=>{if(location.hash==='#hero')timeline.go(0);else if(location.hash==='#top')timeline.go(joinStory(0));else {const target=document.getElementById(location.hash.slice(1));if(target)target.scrollIntoView({block:'start',behavior:'instant'});}});}}
-catch{deactivate();error.hidden=false;error.querySelector('span').textContent='Анимация недоступна. Скетч и ключевые состояния доступны ниже.';document.querySelector('.retry').hidden=true;}
+catch{deactivate();error.hidden=false;error.querySelector('span').textContent='Не удалось загрузить анимацию. Проверьте соединение и повторите попытку.';}

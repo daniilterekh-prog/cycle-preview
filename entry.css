@@ -12,3 +12,21 @@
 .entry-enhanced .experience .controls{opacity:var(--entry-copy,0)}
 .entry-enhanced .viewport[inert]{pointer-events:none}
 .entry-enhanced .hero~.skip{z-index:50}
+/* Keep the same scroll experience when a phone is turned sideways. */
+@media(orientation:landscape) and (max-height:450px){
+ .animated .viewport{padding-top:72px}
+ .animated .layout{display:grid;grid-template-columns:42% 58%;align-items:center;min-height:0;max-height:none;gap:0}
+ .animated .copy{padding:8px 20px 8px 0}
+ .animated .copy h2,.animated .copy-panel[data-panel=strategy] h2,.animated .copy-panel[data-panel=final] h2{font-size:clamp(23px,3.5vw,30px);line-height:1.05;margin-bottom:12px}
+ .animated .copy h2 br{display:none}
+ .animated .eyebrow{font-size:9px;margin-bottom:10px}
+ .animated .description{font-size:12px;line-height:1.5;margin-bottom:0}
+ .animated .detail{display:none}
+ .animated .scene{min-height:0;height:100%;max-height:none;margin:0}
+ .animated .scene figcaption{font-size:7px}
+ .animated .controls{padding:4px 0 max(6px,env(safe-area-inset-bottom))}
+ .animated .control-bottom{display:flex;gap:20px;justify-content:space-between}
+ .animated .control-bottom button{font-size:9px;min-height:32px;padding:6px 0}
+ .animated .control-bottom>span{display:none}
+ .animated .copy .text-action{font-size:11px;min-height:32px;padding:6px 0;margin-top:8px}
+}
