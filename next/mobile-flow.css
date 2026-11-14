@@ -1,0 +1,24 @@
+/* Prototype: native chapter flow, one shared animated scene, no inner scroll. */
+html.mobile-flow.animated .experience{height:auto;padding-top:80svh}
+html.mobile-flow.animated .viewport{position:relative;top:auto;height:auto;min-height:0;display:block;padding-top:68px}
+html.mobile-flow.animated .layout{display:block;min-height:0}
+html.mobile-flow.animated .copy{max-width:none;padding:0;transform:none}
+html.mobile-flow.animated .copy-panels{display:block;min-height:0}
+html.mobile-flow.animated .copy-panel,html.mobile-flow.animated .copy-panel.active{display:flex;flex-direction:column;position:relative;width:100%;padding:32px 0 48px;border-bottom:1px solid var(--line);animation:none}
+html.mobile-flow.animated .copy-panel>.eyebrow{order:0}
+html.mobile-flow.animated .copy-panel>h2{order:1;font-size:clamp(29px,7.9vw,40px);line-height:1.1;margin:0 0 16px}
+html.mobile-flow.animated .copy-panel>.description{order:2;font-size:16px;line-height:1.5}
+html.mobile-flow.animated .mobile-scene-anchor{order:3;display:block;height:0;flex:none}
+html.mobile-flow.animated .copy-panel>.stage-still,html.mobile-flow.animated .copy-panel>.scene{order:4;display:block;position:relative;width:100%;height:clamp(210px,72vw,320px);min-height:0;max-height:none;flex:none;aspect-ratio:auto;margin:6px 0 22px}
+html.mobile-flow.animated .copy-panel>.scene{position:sticky;top:var(--mobile-scene-top,130px);z-index:2;background:white}
+html.mobile-flow.animated .copy-panel[data-scene-active]>.stage-still{display:none}
+html.mobile-flow.animated .stage-still img{height:calc(100% - 30px);aspect-ratio:auto;object-fit:contain}
+html.mobile-flow.animated .copy-panel>.stage-result{order:5;font-size:15px;line-height:1.55;max-width:none;margin-bottom:18px}
+html.mobile-flow.animated .copy-panel>.stage-flow{order:6;font-size:14px;line-height:1.5;margin:0 0 18px}
+html.mobile-flow.animated .copy-panel[data-panel=systems]>.stage-flow{display:grid;gap:10px}
+html.mobile-flow.animated .copy-panel>.stage-example{order:7;align-self:flex-start;font-size:14px;min-height:44px}
+html.mobile-flow.animated .controls{position:sticky;top:68px;z-index:21;opacity:var(--entry-copy,0);background:white;padding:4px 0 8px;border-top:0;border-bottom:1px solid var(--line)}
+html.mobile-flow.animated .control-bottom{display:flex;flex-wrap:nowrap;gap:20px;overflow-x:auto;scrollbar-width:none}
+html.mobile-flow.animated .control-bottom button{font-size:12px;flex:none;min-height:44px}
+html.mobile-flow.animated .scene figcaption{font-size:8px}
+@media(orientation:landscape) and (max-height:500px){html.mobile-flow.animated .viewport{padding-top:58px}html.mobile-flow.animated .controls{top:58px}html.mobile-flow.animated .copy-panel>.scene,html.mobile-flow.animated .copy-panel>.stage-still{height:210px;position:relative;top:auto}html.mobile-flow.animated .copy h2{font-size:30px}}
