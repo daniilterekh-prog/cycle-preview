@@ -1,0 +1,250 @@
+{
+  "sourceSignature": "ae44dcdf10d466420fe9cd5e0a95d8ea5e6000c66c20f01bc9a7c92e29ab6f85",
+  "sourcePreserved": true,
+  "neighbouringFrames": 16,
+  "profilesDecoded": 32,
+  "alpha": "exact against each resized reference",
+  "beforeAEGrade": true,
+  "moduleSHA256": {
+    "building-canvas.mjs": "c9d7368d69627100c9500020471a8bd13fea21b84f2e7acddef56aa3d3a2449f",
+    "frame-loader.mjs": "80482dc7eb65447c5c19f666b91ee3d6b83205aa5740f247fb520c65323d2103",
+    "encoded-frames.mjs": "09134ab647908a04c1fc8ed9d4c9c02b7caeb32ed178fad59fc2abf5208cc921",
+    "cycle-wordmark.svg": "923f4b9221c097da49b43e2acc11ebe291db351b0f1566196abd46235d38f6a0",
+    "fragment-layers.mjs": "e4ea05ead9e0c5298fccf57230d6ba1b298c16e3bb8656aebb36effaf5a9651a",
+    "intro-timeline.mjs": "509fabb4a412642e68cd80a5dd2f634f2f12f6bfa713e474c1a9be6d74658a83",
+    "stages.mjs": "34e607c550e6cdbbd00e39a63264a93954b31db55e425b9b80ca6a30511a3637",
+    "ae-pencil-canvas.mjs": "0366957a7dab0b31c6e3b38e71a6b265377c3d8bd37a1488eade803d107c7475",
+    "ae-pencil-timeline.mjs": "605f9b43c34b78acbb99a11fb98a7ffc36d4ec34170f34dbb4d16c7972257157",
+    "pencil-timeline.mjs": "8e9ee534b0cb6fe94a44f88590aa19063ce78d17bf0cb6ca7676d331b1a3a8e3",
+    "load-ae-pencil.mjs": "a5afad650f737e651b18cf6d09cdd26c59452eed1d50d7e779ab8a724bfd68be",
+    "ae-pencil.json": "19b3635bd1bf0f61d819243af7762d491fc030bebc3cf3366011580f3a73a120",
+    "ae-pencil.json.gz": "218b5d74e3d6229f44fc785b2ba0f69dde1a26ae86dad9e48a7c2667571cb8bc"
+  },
+  "checks": [
+    {
+      "profile": "desktop",
+      "index": 0,
+      "sourceIndex": 24,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 0,
+      "sourceIndex": 24,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 1,
+      "sourceIndex": 25,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 1,
+      "sourceIndex": 25,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 2,
+      "sourceIndex": 26,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 2,
+      "sourceIndex": 26,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 3,
+      "sourceIndex": 27,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 3,
+      "sourceIndex": 27,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 4,
+      "sourceIndex": 28,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 4,
+      "sourceIndex": 28,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 5,
+      "sourceIndex": 29,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 5,
+      "sourceIndex": 29,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 6,
+      "sourceIndex": 30,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 6,
+      "sourceIndex": 30,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 7,
+      "sourceIndex": 31,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 7,
+      "sourceIndex": 31,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 8,
+      "sourceIndex": 32,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 8,
+      "sourceIndex": 32,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 9,
+      "sourceIndex": 33,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 9,
+      "sourceIndex": 33,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 10,
+      "sourceIndex": 34,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 10,
+      "sourceIndex": 34,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 11,
+      "sourceIndex": 35,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 11,
+      "sourceIndex": 35,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 12,
+      "sourceIndex": 36,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 12,
+      "sourceIndex": 36,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 13,
+      "sourceIndex": 37,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 13,
+      "sourceIndex": 37,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 14,
+      "sourceIndex": 38,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 14,
+      "sourceIndex": 38,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 15,
+      "sourceIndex": 39,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 15,
+      "sourceIndex": 39,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    }
+  ],
+  "renderSeconds": 108.12312209999754
+}

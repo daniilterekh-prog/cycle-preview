@@ -9,7 +9,10 @@
     "building-canvas.mjs": "c9d7368d69627100c9500020471a8bd13fea21b84f2e7acddef56aa3d3a2449f",
     "frame-loader.mjs": "80482dc7eb65447c5c19f666b91ee3d6b83205aa5740f247fb520c65323d2103",
     "encoded-frames.mjs": "09134ab647908a04c1fc8ed9d4c9c02b7caeb32ed178fad59fc2abf5208cc921",
-    "cycle-wordmark.svg": "923f4b9221c097da49b43e2acc11ebe291db351b0f1566196abd46235d38f6a0"
+    "cycle-wordmark.svg": "923f4b9221c097da49b43e2acc11ebe291db351b0f1566196abd46235d38f6a0",
+    "fragment-layers.mjs": "e4ea05ead9e0c5298fccf57230d6ba1b298c16e3bb8656aebb36effaf5a9651a",
+    "intro-timeline.mjs": "509fabb4a412642e68cd80a5dd2f634f2f12f6bfa713e474c1a9be6d74658a83",
+    "stages.mjs": "34e607c550e6cdbbd00e39a63264a93954b31db55e425b9b80ca6a30511a3637"
   },
   "checks": [
     {
