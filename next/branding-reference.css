@@ -1,0 +1,64 @@
+/* Branding: the approved desktop board and the compact mobile chapter. */
+html.animated[data-stage=branding] .viewport{padding:9.75svh 3.65vw 0;height:100svh;min-height:0}
+html.animated[data-stage=branding] .layout{grid-template-columns:40% 60%;height:79.25svh;flex:none;align-items:center}
+html.animated[data-stage=branding] .copy{padding:8.7svh 0 0;max-width:none;transform:none;align-self:start}
+html.animated[data-stage=branding] .copy-panels{min-height:0}
+[data-panel=branding]{font-family:Inter,Arial,sans-serif}
+[data-panel=branding] .eyebrow{font-size:clamp(14px,1.4vw,21px);line-height:1.4;letter-spacing:.1em;margin:0 0 3.6svh;color:var(--ink)}
+.copy [data-panel=branding] h2{font-family:Inter,Arial,sans-serif;font-size:clamp(32px,3.3vw,56px);font-weight:400;line-height:1.2;letter-spacing:-.045em;margin:0 0 2svh}
+[data-panel=branding] .description{font-size:clamp(16px,1.5vw,24px);line-height:1.45;max-width:calc(100% - 5%);margin:0 0 30px}
+[data-panel=branding] .stage-result{display:grid;grid-template-columns:25% 1fr;gap:10px;max-width:calc(100% - 10%);font-size:clamp(14px,1.3vw,20px);line-height:1.45;padding:2.4svh 0 2.6svh;margin:0;border-top:1px solid #bdbdbb;border-bottom:1px solid #bdbdbb}
+[data-panel=branding] .stage-result>span{font:inherit;letter-spacing:0;text-transform:none;color:inherit;margin:0}
+[data-panel=branding] .stage-result>span:after{content:':'}
+.branding-result-copy{font-weight:400}
+.brand-system{margin:2.6svh 0 0;max-width:calc(100% - 10%)}
+.brand-system>figcaption{font-size:clamp(14px,1.2vw,19px);line-height:1.4;margin:0 0 2.9svh}
+.brand-system-board{display:grid;grid-template-columns:30% 1fr;gap:7%;align-items:center;width:84%}
+.brand-construction{display:block;width:100%;height:auto}
+.brand-system-type{border-left:1px solid #aaa;padding-left:16%;min-width:0}
+.brand-system-type>img{display:block;width:100%;height:auto}
+.brand-system-specimens{display:flex;align-items:center;gap:12%;margin-top:20px;font-size:clamp(24px,2.4vw,38px);font-weight:300;line-height:1.2}
+.brand-system-specimens>span:nth-child(2){font-family:Onest,Arial,sans-serif;font-weight:400}
+.brand-system-swatches{display:flex;gap:7px;flex:1}
+.brand-system-swatches i{width:clamp(15px,1.5vw,24px);aspect-ratio:1;background:#494a47;display:block}
+.brand-system-swatches i:nth-child(2){background:#949590}.brand-system-swatches i:nth-child(3){background:#c9cac5}
+.brand-system-note{font-size:clamp(11px,.95vw,14px);line-height:1.4;color:#898b88;margin:10px 0 0}
+.branding-mobile-action{display:none}
+html.animated[data-stage=branding] .scene{height:100%;max-height:none;min-height:0}
+html[data-stage=branding] .scene figcaption{visibility:hidden}
+html[data-stage=branding] .controls{border-color:#aaa;padding:9px 0 20px}
+html[data-stage=branding] .control-bottom button{font-size:clamp(14px,1.4vw,20px);min-height:44px}
+html[data-stage=branding] .control-bottom button[aria-pressed=true]{font-weight:500}
+@media(min-width:701px) and (max-height:760px){
+ html.animated[data-stage=branding] .copy{padding-top:0;align-self:center}
+ [data-panel=branding] .eyebrow{margin-bottom:18px}
+ .copy [data-panel=branding] h2{font-size:clamp(30px,3.3vw,46px);margin-bottom:18px}
+ [data-panel=branding] .description{margin-bottom:22px}
+ [data-panel=branding] .stage-result{padding:16px 0}
+ .brand-system{margin-top:18px}.brand-system>figcaption{margin-bottom:12px}
+ .brand-system-board{max-width:340px}.brand-system-note{margin-top:9px}
+}
+@media(max-width:700px){
+ html.animated[data-stage=branding] .viewport{padding:8svh 5.5vw 0}
+ html.animated[data-stage=branding] .layout{display:grid;grid-template-columns:1fr;grid-template-rows:auto auto auto minmax(80px,1fr) auto auto auto;height:auto;flex:1;align-content:stretch;padding-top:4.8svh;padding-bottom:3.5svh;row-gap:0}
+ [data-panel=branding] .eyebrow{font-size:clamp(11px,1.65svh,15px);margin:0 0 2.1svh;line-height:1.4}
+ .copy [data-panel=branding] h2{font-size:clamp(24px,8.1vw,56px);line-height:1.18;letter-spacing:-.045em;margin:0 0 2.7svh}
+ .copy [data-panel=branding] h2 br{display:block}
+ [data-panel=branding] .description{font-size:clamp(14px,4vw,24px);line-height:1.4;max-width:none;margin:0}
+ [data-panel=branding] .stage-result{display:block;max-width:none;border-color:#aaa;border-bottom:0;font-size:clamp(15px,4.4vw,27px);line-height:1.4;padding:1.9svh 0 0;margin:0 0 1.7svh}
+ [data-panel=branding] .stage-result>span{display:block;font-size:clamp(11px,3.3vw,20px);letter-spacing:.14em;text-transform:uppercase;margin:0 0 1svh}
+ [data-panel=branding] .stage-result>span:after{content:none}
+ .brand-system{display:none}
+ [data-panel=branding] .stage-example{display:inline-flex;font-size:clamp(15px,4.4vw,27px);line-height:1.5;min-height:35px;padding:0;gap:10px;border-color:var(--ink)}
+ html.animated[data-stage=branding] .scene{height:100%;min-height:0;max-height:none;width:calc(100% + 7vw);margin-left:-3.5vw;aspect-ratio:auto}
+ html[data-stage=branding] .controls{height:7svh;min-height:48px;padding:0 0 env(safe-area-inset-bottom)}
+}
+@media(max-width:700px) and (max-height:700px){
+ html.animated[data-stage=branding] .layout{padding-top:2svh;padding-bottom:1.5svh}
+ .copy [data-panel=branding] h2{font-size:clamp(23px,7.3vw,30px);margin-bottom:1.6svh}
+ [data-panel=branding] .eyebrow{margin-bottom:1.2svh}
+ [data-panel=branding] .description{font-size:14px}
+ [data-panel=branding] .stage-result{font-size:14px;padding-top:1svh;margin-bottom:.8svh}
+ [data-panel=branding] .stage-result>span{font-size:10px;margin-bottom:.5svh}
+ [data-panel=branding] .stage-example{font-size:15px;min-height:30px}
+}
