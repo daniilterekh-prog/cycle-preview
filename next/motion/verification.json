@@ -1,0 +1,241 @@
+{
+  "sourceSignature": "7262c6e0797014394d491c639369d6b74b0bff67efa366f3416e5bbd53208376",
+  "sourcePreserved": true,
+  "neighbouringFrames": 16,
+  "profilesDecoded": 32,
+  "alpha": "exact against each resized reference",
+  "beforeAEGrade": true,
+  "moduleSHA256": {
+    "building-canvas.mjs": "c9d7368d69627100c9500020471a8bd13fea21b84f2e7acddef56aa3d3a2449f",
+    "frame-loader.mjs": "80482dc7eb65447c5c19f666b91ee3d6b83205aa5740f247fb520c65323d2103",
+    "encoded-frames.mjs": "09134ab647908a04c1fc8ed9d4c9c02b7caeb32ed178fad59fc2abf5208cc921",
+    "cycle-wordmark.svg": "923f4b9221c097da49b43e2acc11ebe291db351b0f1566196abd46235d38f6a0"
+  },
+  "checks": [
+    {
+      "profile": "desktop",
+      "index": 0,
+      "sourceIndex": 104,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 0,
+      "sourceIndex": 104,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 1,
+      "sourceIndex": 105,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 1,
+      "sourceIndex": 105,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 2,
+      "sourceIndex": 106,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 2,
+      "sourceIndex": 106,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 3,
+      "sourceIndex": 107,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 3,
+      "sourceIndex": 107,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 4,
+      "sourceIndex": 108,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 4,
+      "sourceIndex": 108,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 5,
+      "sourceIndex": 109,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 5,
+      "sourceIndex": 109,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 6,
+      "sourceIndex": 110,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 6,
+      "sourceIndex": 110,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 7,
+      "sourceIndex": 111,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 7,
+      "sourceIndex": 111,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 8,
+      "sourceIndex": 112,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 8,
+      "sourceIndex": 112,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 9,
+      "sourceIndex": 113,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 9,
+      "sourceIndex": 113,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 10,
+      "sourceIndex": 114,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 10,
+      "sourceIndex": 114,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 11,
+      "sourceIndex": 115,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 11,
+      "sourceIndex": 115,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 12,
+      "sourceIndex": 116,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 12,
+      "sourceIndex": 116,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 13,
+      "sourceIndex": 117,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 13,
+      "sourceIndex": 117,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 14,
+      "sourceIndex": 118,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 14,
+      "sourceIndex": 118,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    },
+    {
+      "profile": "desktop",
+      "index": 15,
+      "sourceIndex": 119,
+      "alphaChanged": 0,
+      "decodedBytes": 3200000
+    },
+    {
+      "profile": "mobile",
+      "index": 15,
+      "sourceIndex": 119,
+      "alphaChanged": 0,
+      "decodedBytes": 1152000
+    }
+  ],
+  "renderSeconds": 186.03747039999917
+}
