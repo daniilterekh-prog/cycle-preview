@@ -10,8 +10,8 @@ export function transitionState({target,form={},journey,openCases=[],hash=''},no
 export function readTransition(raw,pathname,now=Date.now()){
  try{const state=JSON.parse(raw);if(state?.version!==1||state.target!==pathname||!(state.expiresAt>now)||!Array.isArray(state.openCases))return null;return {...transitionState(state,now),expiresAt:state.expiresAt};}catch{return null;}
 }
-export function languageContext({journey,storyBottom,viewportHeight,sections=[]}){
- if(storyBottom>viewportHeight*.2)return {hash:journey>0?'#top':'#hero',journey};
+export function languageContext({journey,storyBottom,viewportHeight,sections=[],animated=true}){
+ if(animated&&storyBottom>viewportHeight*.2)return {hash:journey>0?'#top':'#hero',journey};
  const section=sections.filter(s=>s.top<=viewportHeight*.3).at(-1)||sections[0];
  return {hash:section?'#'+section.id:'#contact',journey:null};
 }
@@ -31,7 +31,8 @@ export function installLanguages(){
    if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
    if(link.dataset.language===root.dataset.locale){event.preventDefault();return;}
    const target=new URL(languageURL(link.dataset.language,location.href,import.meta.url));
-   const context=languageContext({journey:Number(root.dataset.journey)||0,storyBottom:document.querySelector('.experience')?.getBoundingClientRect().bottom??0,viewportHeight:innerHeight,sections:[...document.querySelectorAll('main>.page-section,.case-card,footer')].filter(el=>!el.hidden&&el.id).map(el=>({id:el.id,top:el.getBoundingClientRect().top}))});
+   const animated=root.classList.contains('animated');
+   const context=languageContext({animated,journey:Number(root.dataset.journey)||0,storyBottom:document.querySelector('.experience')?.getBoundingClientRect().bottom??0,viewportHeight:innerHeight,sections:[...document.querySelectorAll(animated?'main>.page-section,.case-card,footer':'.hero,[data-panel],main>.page-section,.case-card,footer')].filter(el=>!el.hidden&&el.id).map(el=>({id:el.id,top:el.getBoundingClientRect().top}))});
    target.hash=context.hash;
    const state=transitionState({target:target.pathname,form:form?Object.fromEntries(new FormData(form)):{},...context,openCases:[...document.querySelectorAll('.case-card')].filter(el=>el.querySelector('details[open]')).map(el=>el.id)});
    try{sessionStorage.setItem(key,JSON.stringify(state));localStorage.setItem('cycle:language',link.dataset.language);}catch{}

@@ -1,0 +1,34 @@
+/* Progressive enhancement: the HTML remains readable without the player.
+   This layout is selected by the OS preference or a real loading failure. */
+.stage-still{display:none}
+html:not(.animated) .experience{height:auto}
+html:not(.animated) .viewport{position:relative;display:flex;flex-direction:column;height:auto;min-height:0;padding-top:40px}
+html:not(.animated) .layout{display:block;min-height:0}
+html:not(.animated) .copy{max-width:none;padding:0}
+html:not(.animated) .copy-panels{display:block;min-height:0}
+html:not(.animated) .copy-panel{display:grid;grid-template-columns:minmax(0,38fr) minmax(0,62fr);column-gap:40px;align-content:center;padding:48px 0 64px;border-bottom:1px solid var(--line);animation:none;scroll-margin-top:100px}
+html:not(.animated) .copy-panel:last-child{border-bottom:0}
+html:not(.animated) .copy-panel>*{grid-column:1;min-width:0}
+html:not(.animated) .copy-panel>.stage-still{display:block;grid-column:2;grid-row:1/span 7;align-self:center}
+.stage-still img{display:block;width:100%;height:auto;aspect-ratio:1.25;object-fit:contain}
+html:not(.animated) .scene{display:none}
+html:not(.animated) .error{position:static;order:-1;max-width:none;margin:0 0 24px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+html:not(.animated) .error button{min-height:44px;flex:none}
+.animated .copy-panel:not(.active){display:none}
+.animated .copy-panel.active{display:block}
+@media(max-width:700px){
+ html:not(.animated) .viewport{padding-top:12px}
+ html:not(.animated) .copy-panel{display:flex;flex-direction:column;gap:0;padding:36px 0 44px;scroll-margin-top:82px}
+ html:not(.animated) .copy-panel>.eyebrow{order:0}
+ html:not(.animated) .copy-panel>h2{order:1}
+ html:not(.animated) .copy-panel>.description{order:2}
+ html:not(.animated) .copy-panel>.stage-still{order:3;width:100%;margin:10px 0 20px}
+ html:not(.animated) .copy-panel>.stage-result{order:4}
+ html:not(.animated) .copy-panel>.stage-flow{order:5;display:flex}
+ html:not(.animated) .copy-panel>.stage-example{order:6;align-self:flex-start}
+ html:not(.animated) .error{display:block}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*::before,*::after{animation:none!important;transition:none!important}
+}

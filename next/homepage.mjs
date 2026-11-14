@@ -1,6 +1,6 @@
 import {draftInquiry,deliverInquiry} from './contact.mjs';
 import {siteConfig} from './site-config.mjs';
-import {installLanguages,translator} from './language.mjs';
+import {installLanguages,translator} from './language.mjs?v=story-access-1';
 const t=translator();installLanguages();
 const header=document.querySelector('.site-header'),menu=document.querySelector('.menu-toggle');
 function closeMenu(){header.removeAttribute('data-menu-open');menu.setAttribute('aria-expanded','false');}
