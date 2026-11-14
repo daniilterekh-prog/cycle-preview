@@ -1,0 +1,75 @@
+/* Strategy reference: one viewport, consistent scene placement and readable copy. */
+.site-header{height:9.75svh;min-height:64px;max-height:88px;margin:0 3.65vw;padding:0;border-color:#bdbdbb;gap:28px}
+.entry-enhanced .site-header{left:0;right:0}
+.site-header .logo{width:clamp(112px,12.4vw,178px)}
+.site-header nav>a[href="#top"],.site-header nav>a[href="#approach"],.site-header nav>a[href="#team"]{display:none}
+.site-header nav{gap:44px}.site-header nav a{font-size:16px}.site-header .nav-contact{border:0;margin:0}.nav-contact .icon{display:none}
+.site-header>.language-switch{border-left:1px solid #bdbdbb;padding-left:28px;font-size:14px;gap:2px}.language-switch a[aria-current=page]{text-decoration:none}
+.compact-stages{display:none}
+html.animated[data-stage=strategy] .viewport{padding:9.75svh 3.65vw 0;height:100svh;min-height:0}
+html.animated[data-stage=strategy] .layout{grid-template-columns:40% 60%;height:calc(79.25svh);flex:none;align-items:center}
+html.animated[data-stage=strategy] .copy{padding:0;max-width:none;transform:none}
+html.animated[data-stage=strategy] .copy-panels{min-height:0}
+[data-panel=strategy] .eyebrow{font-size:clamp(14px,1.48vw,21px);color:var(--ink);letter-spacing:.1em;margin-bottom:30px}
+.copy [data-panel=strategy] h2{font-family:Inter,Arial,sans-serif;font-size:clamp(36px,3.75vw,60px);font-weight:400;line-height:1.22;letter-spacing:-.04em;margin:0 0 34px}
+[data-panel=strategy] .description{font-family:Inter,Arial,sans-serif;font-size:clamp(16px,1.65vw,24px);line-height:1.38;max-width:430px;margin:0 0 40px}
+[data-panel=strategy] .stage-result{max-width:430px;border-color:#bdbdbb;padding-top:23px;font-size:clamp(14px,1.48vw,21px);line-height:1.4;margin:0 0 24px}
+[data-panel=strategy] .stage-result>span{display:inline;font-size:inherit;letter-spacing:0;text-transform:none;color:inherit;margin:0 5px 0 0}
+[data-panel=strategy] .stage-result>span:after{content:':'}
+[data-panel=strategy] .stage-example{font-size:clamp(15px,1.55vw,22px);gap:10px;padding:4px 0;min-height:36px;border-color:var(--ink)}
+.strategy-mobile-action,.strategy-mobile-copy{display:none}
+html.animated[data-stage=strategy] .scene{height:100%;max-height:none;min-height:0}
+html[data-stage=strategy] .scene figcaption{justify-content:flex-end;bottom:4.8svh;font-size:clamp(9px,.85vw,13px);letter-spacing:.13em;color:var(--ink)}
+html[data-stage=strategy] .scene figcaption span:nth-child(2){display:none}
+html[data-stage=strategy] .controls{border-color:#aaa;padding:9px 0 20px}
+html[data-stage=strategy] .control-bottom button{font-size:clamp(14px,1.4vw,20px);min-height:44px}
+html[data-stage=strategy] .control-bottom button[aria-pressed=true]{font-weight:500}
+@media(max-width:700px){
+ .site-header{margin:0 5.5vw;height:8svh;min-height:52px;gap:12px;max-height:none}
+ .site-header .logo{width:27vw;max-width:160px}.site-header>.language-switch{margin-left:auto;border:0;padding:0;font-size:12px;gap:0}.language-switch a{min-width:24px}
+ .menu-toggle{order:3;font-size:0;border-left:1px solid #bbb;padding:0 0 0 16px;margin:0;min-height:30px}.menu-toggle .icon{width:24px;height:24px}
+ .site-header nav{top:100%;gap:8px}.site-header nav a{font-size:16px}
+ html.animated .viewport,html.animated[data-stage=strategy] .viewport{padding:8svh 5.5vw 0;height:100svh;min-height:0;display:flex;flex-direction:column}
+ html.animated .layout,html.animated[data-stage=strategy] .layout{display:grid;grid-template-columns:1fr;grid-template-rows:auto auto auto minmax(80px,1fr) auto auto auto;height:auto;flex:1;min-height:0;align-content:stretch;padding-top:4.8svh;padding-bottom:3.5svh;row-gap:0}
+ html.animated .copy,html.animated .copy-panels{display:contents}
+ html.animated .copy-panel.active{display:contents}
+ html.animated .copy-panel:not(.active){display:none}
+ .copy-panel>.eyebrow{grid-row:1}.copy-panel>h2{grid-row:2}.copy-panel>.description{grid-row:3}.scene{grid-row:4}.copy-panel>.stage-result{grid-row:5}.copy-panel>.stage-flow{grid-row:6}.copy-panel>.stage-example{grid-row:7;justify-self:start}
+ [data-panel=strategy] .eyebrow{font-size:clamp(11px,1.65svh,15px);margin:0 0 2.1svh;line-height:1.4}
+ .copy [data-panel=strategy] h2{font-size:clamp(24px,8.1vw,40px);line-height:1.18;letter-spacing:-.045em;margin:0 0 2.7svh}.copy [data-panel=strategy] h2 br{display:block}
+ [data-panel=strategy] .description{font-size:clamp(14px,4vw,18px);line-height:1.4;margin:0}
+ .strategy-desktop-copy,.strategy-desktop-action{display:none}.strategy-mobile-copy,.strategy-mobile-action{display:inline}
+ html.animated .scene,html.animated[data-stage=strategy] .scene{height:100%;min-height:0;max-height:none;width:calc(100% + 7vw);margin-left:-3.5vw;aspect-ratio:auto}
+ html.animated .scene figcaption,html[data-stage=strategy] .scene figcaption{bottom:2.5svh;right:3.5vw;left:0;justify-content:flex-end;font-size:clamp(7px,1.9vw,10px);letter-spacing:.12em}
+ .scene figcaption span:nth-child(2){display:none}
+ [data-panel=strategy] .stage-result{font-size:clamp(15px,4.2vw,20px);line-height:1.4;padding-top:1.9svh;margin:0 0 1.7svh;border-color:#aaa}
+ [data-panel=strategy] .stage-result>span{display:block;font-size:clamp(11px,3.3vw,15px);letter-spacing:.14em;text-transform:uppercase;margin:0 0 1svh}
+ [data-panel=strategy] .stage-result>span:after{content:none}
+ [data-panel=strategy] .stage-example{font-size:clamp(15px,4.2vw,20px);min-height:35px;padding:0;gap:10px}
+ html.animated .controls,html[data-stage=strategy] .controls{flex:none;height:7svh;min-height:48px;padding:0 0 env(safe-area-inset-bottom);border-color:#999}
+ .control-bottom{display:none!important}.compact-stages{height:100%;display:grid;grid-template-columns:44px 1fr auto 44px;align-items:center;gap:18px;font-size:16px}
+ .compact-stages button{height:44px;border:0;background:none;padding:0;display:grid;place-items:center}.compact-stages svg{width:26px;height:24px;fill:none;stroke:currentColor;stroke-width:1.2}
+ .compact-name{font-weight:500}.compact-count{letter-spacing:.09em}
+}
+@media(max-width:700px) and (max-height:700px){
+ html.animated .layout,html.animated[data-stage=strategy] .layout{padding-top:2svh;padding-bottom:1.5svh}
+ .copy [data-panel=strategy] h2{font-size:clamp(23px,7.3vw,30px);margin-bottom:1.6svh}
+ [data-panel=strategy] .eyebrow{margin-bottom:1.2svh}
+ [data-panel=strategy] .description{font-size:14px}
+ [data-panel=strategy] .stage-result{font-size:14px;padding-top:1svh;margin-bottom:.8svh}
+ [data-panel=strategy] .stage-result>span{font-size:10px;margin-bottom:.5svh}
+ [data-panel=strategy] .stage-example{font-size:15px;min-height:30px}
+}
+
+/* Keep sketch and construction registered when the stage changes. */
+html.animated .scene>.poster,html.animated .scene>canvas,html.animated .scene>.sketch-layer{transform:scale(1.15);transform-origin:50% 50%}
+@media(max-width:700px){
+ .entry-enhanced.animated .copy-panel.active>*{opacity:var(--entry-copy,0)}
+}
+
+html.animated .scene{overflow:hidden}
+
+@media(max-width:700px){
+ .copy [data-panel=branding] h2{font-family:Inter,Arial,sans-serif;font-size:clamp(24px,8.1vw,40px);font-weight:400;line-height:1.18;letter-spacing:-.045em;}
+ .copy [data-panel=branding] h2 br{display:block}
+}

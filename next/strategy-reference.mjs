@@ -1,0 +1,23 @@
+import {translator} from './language.mjs?v=story-access-1';
+const t=translator();
+const header=document.querySelector('.site-header');
+const languages=header.querySelector('.language-switch');
+if(languages)header.append(languages);
+const menu=header.querySelector('.menu-toggle');
+menu.setAttribute('aria-label',menu.textContent.trim());
+for(const node of [...menu.childNodes])if(node.nodeType===Node.TEXT_NODE)node.remove();
+const buttons=[...document.querySelectorAll('.control-bottom [data-seek]')];
+const ids=['strategy','branding','design','digital','systems','final'];
+const labels=['Strategy','Branding','Design','Digital','IT & CRM','Full cycle'];
+buttons.forEach((button,i)=>button.textContent=labels[i]);
+const controls=document.querySelector('.controls');
+const compact=document.createElement('div');compact.className='compact-stages';
+compact.innerHTML='<button type="button" aria-label="Previous stage"><svg viewBox="0 0 32 24" aria-hidden="true"><path d="M30 12H2m9-9-9 9 9 9"/></svg></button><span class="compact-name"></span><span class="compact-count"></span><button type="button" aria-label="Next stage"><svg viewBox="0 0 32 24" aria-hidden="true"><path d="M2 12h28m-9-9 9 9-9 9"/></svg></button>';
+compact.firstElementChild.setAttribute('aria-label',t('Предыдущий этап'));
+compact.lastElementChild.setAttribute('aria-label',t('Следующий этап'));
+controls.append(compact);
+let current=0;
+function sync(id){current=Math.max(0,ids.indexOf(id));compact.querySelector('.compact-name').textContent=labels[current];compact.querySelector('.compact-count').textContent=`0${current+1} / 06`;buttons.forEach((button,i)=>button.setAttribute('aria-pressed',String(i===current)));}
+document.addEventListener('cycle:stage',event=>sync(event.detail));sync(document.documentElement.dataset.stage||'strategy');
+compact.firstElementChild.addEventListener('click',()=>current?buttons[current-1].click():header.querySelector('.logo').click());
+compact.lastElementChild.addEventListener('click',()=>current<5?buttons[current+1].click():document.getElementById('work').scrollIntoView({behavior:'smooth'}));

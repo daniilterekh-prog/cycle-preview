@@ -1,4 +1,6 @@
-import {createMobileTimeline,mobileFlowWanted} from './mobile-timeline.mjs?v=mobile-flow-1';
+import {loadReferencePencil,ReferencePencilCanvas} from './reference-pencil.mjs';
+import {createSceneRegistration} from './scene-registration.mjs';
+// One pinned scene on every viewport, as approved by the owner.
 import {splitProgress,joinStory,entryVisuals} from './entry-timing.mjs';
 import {createEntryTransition} from './entry-transition.mjs';
 import {FrameLoader} from './frame-loader.mjs?v=encoded-buffer-2';
@@ -19,6 +21,7 @@ const t=translator();
 const root=document.documentElement,experience=document.querySelector('.experience'),canvas=document.querySelector('canvas'),poster=document.querySelector('.poster'),sketch=document.querySelector('.sketch-layer'),controls=document.querySelector('.controls'),slider=document.querySelector('#scrubber'),frameOutput=document.querySelector('#frame'),phase=document.querySelector('.phase'),error=document.querySelector('.error');
 const renderer=new BuildingCanvas(canvas);
 const panels=[...document.querySelectorAll('[data-panel]')];
+const registration=createSceneRegistration(root,document.querySelector('.scene'),panels);
 panels.forEach(panel=>{panel.id=`stage-${panel.dataset.panel}`;});
 let manifest,loader,aborter,timeline,profile,active=false,requested=-1,state=storyState(0),resizeRAF=0,end=0;
 let pencil,pencilPromise,pencilAborter,journeyProgress=0,entryProgress=0;
@@ -28,7 +31,7 @@ function rememberLocation(){if(!active||!layoutSnapshot||layoutSnapshot.width!==
 addEventListener('scroll',rememberLocation,{passive:true});
 const sectionAnchors=()=>[...document.querySelectorAll('main>.page-section,footer')].filter(el=>!el.hidden).map(el=>({id:el.id,top:scrollY+el.getBoundingClientRect().top})).filter(el=>el.id);
 function measureLayout(){layoutSnapshot={start:experience.offsetTop,end:experience.offsetTop+experience.offsetHeight-innerHeight,header:document.querySelector('.site-header').offsetHeight,anchors:sectionAnchors(),width:innerWidth,height:innerHeight};rememberLocation();}
-root.dataset.playerBuild='homepage-v4-mobile-1';
+root.dataset.playerBuild='reference-pencil-v4';
 const entry=createEntryTransition();
 function syncPoster(){poster.style.visibility=posterNeeded({pencilPainted:!!pencil,sketchOpacity:state.sketch,frame:renderer.last,solidOpacity:Number(canvas.style.opacity)})?'visible':'hidden';}
 function drawPencil(){if(active&&pencil&&state.sketch>0)pencil.draw(Math.max(state.draw,entryVisuals(entryProgress).ink));syncPoster();}
@@ -36,14 +39,15 @@ function ensurePencil(){
  if(pencilPromise||entryProgress<.25||state.sketch<=0||experience.getBoundingClientRect().top>=innerHeight)return;
  const controller=pencilAborter=new AbortController(),timer=setTimeout(()=>controller.abort(),12000);
  const read=async file=>{const response=await fetch(new URL(file,import.meta.url),{signal:controller.signal});if(!response.ok)throw Error('Pencil unavailable');return response.json();};
- pencilPromise=loadAEPencil({base:import.meta.url,signal:controller.signal}).then(data=>new AEPencilCanvas(document.querySelector('.pencil-canvas'),data)).catch(async error=>{if(controller.signal.aborted)throw error;root.dataset.pencilFallback='legacy-vector';return new PencilCanvas(document.querySelector('.pencil-canvas'),await read('pencil.json'));}).then(instance=>{
-  if(controller.signal.aborted){instance.release();return;}pencil=instance;root.dataset.pencilSource=pencil instanceof AEPencilCanvas?'after-effects':'legacy-vector';drawPencil();sketch.classList.remove('pencil-loading');sketch.classList.add('pencil-ready');
+ pencilPromise=loadReferencePencil(document.querySelector('.pencil-canvas'),{base:import.meta.url,signal:controller.signal}).catch(async error=>{if(controller.signal.aborted)throw error;root.dataset.pencilFallback='ae-v3';return new AEPencilCanvas(document.querySelector('.pencil-canvas'),await loadAEPencil({base:import.meta.url,signal:controller.signal}));}).catch(async error=>{if(controller.signal.aborted)throw error;root.dataset.pencilFallback='legacy-vector';return new PencilCanvas(document.querySelector('.pencil-canvas'),await read('pencil.json'));}).then(instance=>{
+  if(controller.signal.aborted){instance.release();return;}pencil=instance;root.dataset.pencilSource=pencil instanceof ReferencePencilCanvas?'approved-reference-ae-mask':pencil instanceof AEPencilCanvas?'after-effects':'legacy-vector';drawPencil();sketch.classList.remove('pencil-loading');sketch.classList.add('pencil-ready');
  }).catch(()=>{if(pencilAborter===controller&&!controller.signal.aborted){sketch.classList.remove('pencil-loading');sketch.classList.add('pencil-failed');root.dataset.pencilFallback='true';}}).finally(()=>clearTimeout(timer));
 }
 const profileName=()=>imageProfile(innerWidth,innerHeight,matchMedia('(pointer:coarse)').matches);
 function setStage(id){
  if(root.dataset.stage===id)return;
  root.dataset.stage=id;phase.textContent=t(id==='strategy'?'Strategy — первый замысел':stageForFrame(state.frame).phase);
+ document.dispatchEvent(new CustomEvent('cycle:stage',{detail:id}));
  document.querySelector('.camera-label').textContent=id==='final'?'FINAL / CAMERA PULLBACK':'ONE PERSPECTIVE';
  canvas.setAttribute('aria-label',t(id==='strategy'?'Архитектурный карандашный скетч Kagawa: открытая терраса, наружная лестница и два уровня башенки':'Строительство Kagawa: фасад, двор, свет в окнах и отдаление только в финале'));
  panels.forEach(panel=>{const visible=panel.dataset.panel===id;panel.classList.toggle('active',visible);panel.inert=timeline?.mobile?false:!visible;if(timeline?.mobile)panel.removeAttribute('aria-hidden');else panel.setAttribute('aria-hidden',String(!visible));});timeline?.placeScene?.(id);
@@ -59,9 +63,10 @@ function setProfile(){
 }
 function update(value){
  if(!active||(layoutSnapshot&&(layoutSnapshot.width!==innerWidth||layoutSnapshot.height!==innerHeight)))return;journeyProgress=Math.max(0,Math.min(1,Number(value)||0));const parts=splitProgress(journeyProgress);entryProgress=parts.entry;entry.update(entryProgress);state=storyState(parts.story);root.dataset.journey=journeyProgress.toFixed(5);slider.value=String(Math.round(state.progress*1000));root.dataset.progress=state.progress.toFixed(4);
+ setStage(state.stage);registration.update(state.stage);
  sketch.style.opacity=String(state.sketch);ensurePencil();drawPencil();
  canvas.style.opacity=String(solidOpacity(state,renderer.last));syncPoster();
- setStage(state.stage);frameOutput.value=state.stage==='strategy'?'01 / STRATEGY':`${String(state.frame+1).padStart(3,'0')} / 240`;
+ frameOutput.value=state.stage==='strategy'?'01 / STRATEGY':`${String(state.frame+1).padStart(3,'0')} / 240`;
  if(entryProgress>=.25||state.preload){
   setProfile();
   if(requested!==state.frame){
@@ -75,20 +80,20 @@ function update(value){
  rememberLocation();
 }
 function deactivate(){
- active=false;timeline?.destroy();timeline=null;loader?.close();encoded?.close();aborter?.abort();loader=null;profile=null;requested=-1;
+ active=false;registration.clear();registration.invalidate();timeline?.destroy();timeline=null;loader?.close();encoded?.close();aborter?.abort();loader=null;profile=null;requested=-1;
  pencilAborter?.abort();pencil?.release();pencil=null;pencilPromise=null;sketch.classList.remove('pencil-ready','pencil-loading','pencil-failed');
  canvas.width=canvas.height=1;renderer.key='';renderer.last=-1;
  entry.destroy();root.classList.remove('animated');controls.hidden=true;poster.style.visibility='';canvas.classList.remove('ready');canvas.style.opacity='0';sketch.style.opacity='0';error.hidden=true;
 }
 function activate(){
  if(active)return;if(!renderer.ctx)throw Error('Canvas unavailable');active=true;layoutSnapshot=null;root.classList.remove('scene-failed','story-static');root.dataset.storyMode='animated';root.classList.add('animated');delete root.dataset.stage;entry.activate();controls.hidden=false;error.hidden=true;if(!pencil&&!pencilPromise)sketch.classList.add('pencil-loading');
- try{timeline=mobileFlowWanted()?createMobileTimeline(experience,panels,document.querySelector('.scene'),controls,update,manifest):createScrollTimeline(experience,update);end=experience.offsetTop+experience.offsetHeight-innerHeight;if(timeline.mobile)timeline.refresh();else update(Math.max(0,(scrollY-experience.offsetTop)/(end-experience.offsetTop)));measureLayout();}catch(reason){deactivate();throw reason;}
+ try{timeline=createScrollTimeline(experience,update);end=experience.offsetTop+experience.offsetHeight-innerHeight;if(timeline.mobile)timeline.refresh();else update(Math.max(0,(scrollY-experience.offsetTop)/(end-experience.offsetTop)));measureLayout();}catch(reason){deactivate();throw reason;}
 }
 slider.addEventListener('input',()=>timeline?.go(joinStory(Number(slider.value)/1000)));
 document.querySelectorAll('[data-seek]').forEach(button=>button.addEventListener('click',()=>timeline?.go(joinStory(button.dataset.seek==='strategy'?0:progressForFrame(Number(button.dataset.seek))))));
 document.querySelector('.retry').addEventListener('click',()=>{if(!active){void modes.retry();return;}error.hidden=true;loader?.request(state.frame);});
-addEventListener('resize',()=>{const saved=stableLocation||captureLocation({y:scrollY,...layoutSnapshot});cancelAnimationFrame(resizeRAF);resizeRAF=requestAnimationFrame(()=>{if(!active)return;if(loader)setProfile();if(!!timeline.mobile!==mobileFlowWanted()){timeline.destroy();delete root.dataset.stage;timeline=mobileFlowWanted()?createMobileTimeline(experience,panels,document.querySelector('.scene'),controls,update,manifest):createScrollTimeline(experience,update);}timeline.placeScene?.(state.stage);entry.refresh();timeline.refresh();end=experience.offsetTop+experience.offsetHeight-innerHeight;measureLayout();const y=restoreLocation(saved,layoutSnapshot);if(saved.kind==='mobile-chapter'&&timeline.mobile)timeline.restoreLocation(saved);else if(saved.kind==='story'||saved.kind==='mobile-chapter')timeline.go(saved.progress);else{scrollTo({top:y,behavior:'instant'});update(Math.max(0,(y-experience.offsetTop)/(end-experience.offsetTop)));}});});
-document.fonts?.ready.then(()=>{if(active){timeline.refresh();measureLayout();}});
+addEventListener('resize',()=>{const saved=stableLocation||captureLocation({y:scrollY,...layoutSnapshot});cancelAnimationFrame(resizeRAF);resizeRAF=requestAnimationFrame(()=>{if(!active)return;if(loader)setProfile();timeline.placeScene?.(state.stage);entry.refresh();timeline.refresh();end=experience.offsetTop+experience.offsetHeight-innerHeight;measureLayout();const y=restoreLocation(saved,layoutSnapshot);if(saved.kind==='mobile-chapter'&&timeline.mobile)timeline.restoreLocation(saved);else if(saved.kind==='story'||saved.kind==='mobile-chapter')timeline.go(saved.progress);else{scrollTo({top:y,behavior:'instant'});update(Math.max(0,(y-experience.offsetTop)/(end-experience.offsetTop)));}});});
+document.fonts?.ready.then(()=>{registration.invalidate();if(active){timeline.refresh();measureLayout();update(journeyProgress);}});
 addEventListener('load',()=>{if(active)measureLayout();});
 document.addEventListener('toggle',()=>{if(active)measureLayout();},true);
 addEventListener('pagehide',()=>{loader?.close();encoded?.close();aborter?.abort();loader=null;profile=null;pencil?.release();});

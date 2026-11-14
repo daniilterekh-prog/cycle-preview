@@ -8,7 +8,7 @@ export class AEPencilCanvas{
   this.data=prepareAEPencil(data);this.layers=this.data.layers.map(layer=>({...layer,base:document.createElement('canvas'),completed:0}));this.scratch=document.createElement('canvas');this.key='';this.last=-1;
  }
  resize(){
-  const rect=this.canvas.getBoundingClientRect(),budget=innerWidth<=700?350000:700000,ratio=Math.min(devicePixelRatio||1,1.5,Math.sqrt(budget/Math.max(1,rect.width*rect.height))),w=Math.max(1,Math.round(rect.width*ratio)),h=Math.max(1,Math.round(rect.height*ratio)),key=w+'x'+h;
+  const rect=this.canvas.getBoundingClientRect(),budget=Math.min(this.pixelLimit??Infinity,(innerWidth<=700?2800000:5600000)/(this.layers.length+2)),ratio=Math.min(devicePixelRatio||1,1.5,Math.sqrt(budget/Math.max(1,rect.width*rect.height))),w=Math.max(1,Math.round(rect.width*ratio)),h=Math.max(1,Math.round(rect.height*ratio)),key=w+'x'+h;
   if(key===this.key)return;this.key=key;this.last=-1;this.canvas.width=w;this.canvas.height=h;this.scratch.width=w;this.scratch.height=h;
   for(const layer of this.layers){layer.base.width=w;layer.base.height=h;layer.completed=0;}
   const scale=Math.min(w/this.data.width,h/this.data.height);this.transform=[scale,0,0,scale,(w-this.data.width*scale)/2,(h-this.data.height*scale)/2];
