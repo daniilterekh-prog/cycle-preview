@@ -1,0 +1,11 @@
+/* One stationary opening scene. Only the logo dissolves; no upward translation. */
+.entry-enhanced .hero{position:fixed;inset:0;height:100svh;z-index:30;pointer-events:none;background:transparent}
+.entry-enhanced .hero a{pointer-events:auto}.entry-enhanced .hero[inert] a{pointer-events:none}
+.entry-enhanced .site-header{position:fixed;left:0;right:0;top:0;opacity:var(--entry-nav,0)}
+.entry-enhanced .site-header[inert]{pointer-events:none}
+.entry-enhanced.animated .experience{height:1000svh}
+.entry-enhanced .experience .copy{opacity:var(--entry-copy,0);transform:translate3d(0,var(--entry-lift,12px),0)}
+.entry-enhanced .experience .scene{opacity:var(--entry-scene,0)}
+.entry-enhanced .experience .controls{opacity:var(--entry-copy,0)}
+.entry-enhanced .viewport[inert]{pointer-events:none}
+.entry-enhanced .hero h1{outline:none}
