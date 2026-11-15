@@ -1,4 +1,4 @@
-import {loadReferencePencil,ReferencePencilCanvas} from './reference-pencil.mjs';
+import {loadReferencePencil,ReferencePencilCanvas} from './reference-pencil.mjs?v=reference-fit-v3';
 import {createSceneRegistration} from './scene-registration.mjs?v=reference-fit-v3';
 // One pinned scene on every viewport, as approved by the owner.
 import {splitProgress,joinStory,entryVisuals} from './entry-timing.mjs';

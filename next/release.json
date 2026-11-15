@@ -1,10 +1,10 @@
 {
+  "sourceCommit": "59bcd7b268bed54591eabe3b632b1519e3beac03",
   "version": "reference-fit-v3-20261115",
-  "sourceCommit": "a7b7edb88f8c636a9c77a7646c9d2dd278638315",
-  "builtAt": "2026-11-15T04:03:29.432Z",
   "pages": [
     "ru",
     "en",
     "me"
-  ]
+  ],
+  "builtAt": "2026-11-15T04:10:17.2311729Z"
 }
