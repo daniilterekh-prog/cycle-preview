@@ -1,5 +1,5 @@
 import {loadReferencePencil,ReferencePencilCanvas} from './reference-pencil.mjs';
-import {createSceneRegistration} from './scene-registration.mjs';
+import {createSceneRegistration} from './scene-registration.mjs?v=branding-motion-v1';
 // One pinned scene on every viewport, as approved by the owner.
 import {splitProgress,joinStory,entryVisuals} from './entry-timing.mjs';
 import {createEntryTransition} from './entry-transition.mjs';
@@ -31,7 +31,7 @@ function rememberLocation(){if(!active||!layoutSnapshot||layoutSnapshot.width!==
 addEventListener('scroll',rememberLocation,{passive:true});
 const sectionAnchors=()=>[...document.querySelectorAll('main>.page-section,footer')].filter(el=>!el.hidden).map(el=>({id:el.id,top:scrollY+el.getBoundingClientRect().top})).filter(el=>el.id);
 function measureLayout(){layoutSnapshot={start:experience.offsetTop,end:experience.offsetTop+experience.offsetHeight-innerHeight,header:document.querySelector('.site-header').offsetHeight,anchors:sectionAnchors(),width:innerWidth,height:innerHeight};rememberLocation();}
-root.dataset.playerBuild='reference-pencil-v4';
+root.dataset.playerBuild='branding-motion-v1';
 const entry=createEntryTransition();
 function syncPoster(){poster.style.visibility=posterNeeded({pencilPainted:!!pencil,sketchOpacity:state.sketch,frame:renderer.last,solidOpacity:Number(canvas.style.opacity)})?'visible':'hidden';}
 function drawPencil(){if(active&&pencil&&state.sketch>0)pencil.draw(Math.max(state.draw,entryVisuals(entryProgress).ink));syncPoster();}

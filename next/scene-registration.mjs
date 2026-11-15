@@ -5,7 +5,7 @@ export function createSceneRegistration(root,scene,panels){
  let key='',box;
  const clear=()=>surfaces.forEach(e=>{for(const p of ['left','top','width','height'])e.style.removeProperty(p);});
  return {invalidate(){key='';},update(stage){
-  if(!['strategy','branding'].includes(stage)){clear();return;}
+  if(!['strategy','branding','design'].includes(stage)){clear();return;}
   const next=innerWidth+'x'+innerHeight;
   if(next!==key){
    clear();const saved=root.dataset.stage,active=panels.map(p=>p.classList.contains('active')),boxes=[];

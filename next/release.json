@@ -1,9 +1,6 @@
 {
-  "version": "branding-reference-v1-20261115",
-  "sourceCommit": "f4f86d0e485c8653649cc32402cd518e97e5cb25",
-  "languages": [
-    "ru",
-    "en",
-    "me"
-  ]
+  "version": "branding-motion-v1-20261115",
+  "sourceCommit": "894f09685d434d2c78680978a34e1b4f2f9cdc55",
+  "publishedAt": "2026-11-15T00:21:06.506098+00:00",
+  "scope": "Branding 0-71; Design join 72-86; preserved 87-239"
 }
