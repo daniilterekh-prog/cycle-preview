@@ -1,5 +1,5 @@
 import {loadReferencePencil,ReferencePencilCanvas} from './reference-pencil.mjs';
-import {createSceneRegistration} from './scene-registration.mjs?v=branding-motion-v1';
+import {createSceneRegistration} from './scene-registration.mjs?v=reference-rollout-v1';
 // One pinned scene on every viewport, as approved by the owner.
 import {splitProgress,joinStory,entryVisuals} from './entry-timing.mjs';
 import {createEntryTransition} from './entry-transition.mjs';
@@ -31,7 +31,7 @@ function rememberLocation(){if(!active||!layoutSnapshot||layoutSnapshot.width!==
 addEventListener('scroll',rememberLocation,{passive:true});
 const sectionAnchors=()=>[...document.querySelectorAll('main>.page-section,footer')].filter(el=>!el.hidden).map(el=>({id:el.id,top:scrollY+el.getBoundingClientRect().top})).filter(el=>el.id);
 function measureLayout(){layoutSnapshot={start:experience.offsetTop,end:experience.offsetTop+experience.offsetHeight-innerHeight,header:document.querySelector('.site-header').offsetHeight,anchors:sectionAnchors(),width:innerWidth,height:innerHeight};rememberLocation();}
-root.dataset.playerBuild='branding-motion-v1';
+root.dataset.playerBuild='reference-rollout-v1';
 const entry=createEntryTransition();
 function syncPoster(){poster.style.visibility=posterNeeded({pencilPainted:!!pencil,sketchOpacity:state.sketch,frame:renderer.last,solidOpacity:Number(canvas.style.opacity)})?'visible':'hidden';}
 function drawPencil(){if(active&&pencil&&state.sketch>0)pencil.draw(Math.max(state.draw,entryVisuals(entryProgress).ink));syncPoster();}
@@ -90,7 +90,7 @@ function activate(){
  try{timeline=createScrollTimeline(experience,update);end=experience.offsetTop+experience.offsetHeight-innerHeight;if(timeline.mobile)timeline.refresh();else update(Math.max(0,(scrollY-experience.offsetTop)/(end-experience.offsetTop)));measureLayout();}catch(reason){deactivate();throw reason;}
 }
 slider.addEventListener('input',()=>timeline?.go(joinStory(Number(slider.value)/1000)));
-document.querySelectorAll('[data-seek]').forEach(button=>button.addEventListener('click',()=>timeline?.go(joinStory(button.dataset.seek==='strategy'?0:progressForFrame(Number(button.dataset.seek))))));
+document.querySelectorAll('[data-seek]').forEach(button=>button.addEventListener('click',()=>timeline?.go(joinStory(button.dataset.seek==='strategy'?.205:progressForFrame(Number(button.dataset.seek))))));
 document.querySelector('.retry').addEventListener('click',()=>{if(!active){void modes.retry();return;}error.hidden=true;loader?.request(state.frame);});
 addEventListener('resize',()=>{const saved=stableLocation||captureLocation({y:scrollY,...layoutSnapshot});cancelAnimationFrame(resizeRAF);resizeRAF=requestAnimationFrame(()=>{if(!active)return;if(loader)setProfile();timeline.placeScene?.(state.stage);entry.refresh();timeline.refresh();end=experience.offsetTop+experience.offsetHeight-innerHeight;measureLayout();const y=restoreLocation(saved,layoutSnapshot);if(saved.kind==='mobile-chapter'&&timeline.mobile)timeline.restoreLocation(saved);else if(saved.kind==='story'||saved.kind==='mobile-chapter')timeline.go(saved.progress);else{scrollTo({top:y,behavior:'instant'});update(Math.max(0,(y-experience.offsetTop)/(end-experience.offsetTop)));}});});
 document.fonts?.ready.then(()=>{registration.invalidate();if(active){timeline.refresh();measureLayout();update(journeyProgress);}});

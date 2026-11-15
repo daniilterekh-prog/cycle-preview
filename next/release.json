@@ -1,6 +1,6 @@
 {
-  "version": "branding-motion-v1-20261115",
-  "sourceCommit": "894f09685d434d2c78680978a34e1b4f2f9cdc55",
-  "publishedAt": "2026-11-15T00:21:06.506098+00:00",
-  "scope": "Branding 0-71; Design join 72-86; preserved 87-239"
+  "version": "reference-rollout-v1-20261115",
+  "sourceCommit": "a2e379cdc585ec5349f1151402a8d07fe5396545",
+  "publishedAt": "2026-11-15T01:16:25.887807+00:00",
+  "scope": "Desktop/mobile reference layouts in RU/EN/ME; native Design, Digital, IT and final pullback; preserved prior namespaces"
 }
