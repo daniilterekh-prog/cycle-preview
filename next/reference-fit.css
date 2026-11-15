@@ -1,0 +1,91 @@
+/* Final reference calibration: dimensions, rhythm and readable framing. */
+@media(min-width:701px) and (min-height:501px){
+ .copy .reference-chapter h2{font-size:clamp(30px,3.08vw,51px);line-height:1.2;letter-spacing:-.04em}
+ .reference-chapter .description{font-size:clamp(15px,1.5vw,23px);line-height:1.4}
+ .reference-chapter .digital-route{font-size:clamp(14px,1.4vw,22px);gap:10px}
+ .reference-chapter .digital-outcome{font-size:clamp(14px,1.4vw,22px)}
+ .copy-panel.reference-chapter[data-panel=systems] .crm-process{font-size:clamp(15px,1.4vw,22px)}
+ .page-section h2{font-size:clamp(40px,4.4vw,70px)}
+ .page-section{padding-bottom:65px}
+ .work-section .section-intro{margin-bottom:28px}
+ .case-grid{gap:24px}.case-featured{grid-template-columns:25% 1fr;gap:16px 28px;padding:18px 0}
+ .case-featured .project-visual img{aspect-ratio:2.65}.case-featured .case-meta{font-size:12px}
+ .case-card h3{font-size:clamp(24px,2.5vw,38px)}.case-caption p{font-size:14px;line-height:1.4;margin-top:12px}
+ .project-secondary .secondary-body{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;padding-top:8px}
+ .project-secondary .project-visual{grid-column:2;grid-row:1/5}.project-secondary .project-visual img{aspect-ratio:1.3;height:auto}
+ .project-secondary .case-meta{grid-column:1;grid-row:1;margin:0;font-size:11px}.project-secondary .case-caption{grid-column:1;grid-row:2}.project-secondary .case-detail{grid-column:1;grid-row:3}
+ .project-secondary:has(.case-detail[open]) .case-detail{grid-column:1/-1;grid-row:5}
+ .project-secondary .project-headline{display:none}.project-secondary .case-meta span{margin-bottom:4px}.project-secondary .case-detail summary{font-size:14px}
+ .approach-section{padding-top:24svh;padding-bottom:18svh}.approach-grid{grid-template-columns:42% 54%;gap:4%}.approach-grid h2{font-size:clamp(36px,4.1vw,66px)}
+ .approach-grid .section-description{font-size:clamp(16px,1.5vw,24px);margin-top:28px}.approach-grid .text-action{display:none}
+ .process-list li,.process-list li:first-child{grid-template-columns:70px 1fr;gap:25px;padding:20px 0;min-height:100px}.process-list li>span{font-size:clamp(40px,4.5vw,70px);font-weight:300}.process-list h3{font-size:clamp(20px,2.1vw,34px)}.process-list p{font-size:clamp(14px,1.25vw,20px)}
+ .founder-photo{display:block;aspect-ratio:2.05;overflow:hidden;background:#070707}.founder-photo img{height:100%;aspect-ratio:auto;object-fit:contain;transform:scale(1.1)}
+ .team-profile .founder-copy h3{font-size:clamp(26px,2.7vw,43px)}.team-profile p:not(.demo-label){font-size:clamp(15px,1.3vw,21px)}.team-profile .founder-role{margin-bottom:18px}.founder-role+p{padding:18px 0}
+ .engagement-grid{margin-top:38px;padding-top:20px}.engagement-option>summary{font-size:clamp(24px,2.7vw,43px)}.engagement-option p{font-size:16px;margin:12px 0 18px}
+ .contact-section{padding-top:20svh;padding-bottom:12svh}.contact-grid h2{font-size:clamp(38px,4.1vw,65px)}.contact-grid .section-description{font-size:clamp(16px,1.5vw,24px);margin:30px 0}.contact-caption{font-size:16px!important;margin-top:26px}.contact-email{font-size:14px}
+ .contact-grid input,.contact-grid textarea,.contact-grid select{font-size:16px;margin-bottom:18px;padding:10px 0 14px;min-height:42px}.contact-grid textarea{min-height:120px}.form-bottom .send-button{font-size:18px;min-height:46px;padding:12px 20px}
+}
+.founder-experience-detail{font-size:13px;line-height:1.45;color:#646660;margin:10px 0 14px}.founder-experience-detail summary{cursor:pointer;min-height:30px}.founder-experience-detail .founder-experience{font-size:14px!important;margin:10px 0}
+.team-format-action{display:none}
+.site-footer>.language-switch{display:inline-flex}
+.compact-credit{display:none}
+@media(min-width:701px) and (min-height:501px){
+ .work-section{padding-top:100px;padding-bottom:32px}.work-section .section-intro{margin-bottom:15px}
+ .case-featured .project-visual img{aspect-ratio:3.1}.case-featured{padding:15px 0}
+ .project-secondary .project-visual img{aspect-ratio:1.9}.project-secondary .case-caption>p{display:none}.project-secondary .project-headline{display:block;font-size:14px}
+ .project-secondary .case-detail{margin-top:0}.project-secondary .case-meta{line-height:1.35}
+}
+@media(max-width:700px){
+ .page-section{padding:100px 5.5vw 32px}.page-section h2{font-size:clamp(30px,8.9vw,55px)}.page-section .section-intro{margin-bottom:26px}.page-section .section-intro>p{font-size:16px;margin-top:18px;line-height:1.4}
+ .copy .reference-chapter h2{font-size:clamp(24px,7.8vw,54px)}
+ .case-featured{padding-bottom:24px}.case-featured .project-visual{margin-bottom:20px}.case-card h3{font-size:26px}.case-featured .case-meta{font-size:13px;margin:12px 0 0}.case-meta>span:first-child{font-size:10px;margin-bottom:8px}
+ .case-featured .case-caption>p{font-size:15px;line-height:1.4;margin-top:12px}.case-featured .case-detail{margin-top:12px}.project-secondary>summary{min-height:58px;font-size:20px}.secondary-heading>span:last-child{font-size:13px}.case-detail summary{font-size:17px;min-height:38px}
+ .case-featured .project-visual figcaption{display:none}.case-featured .compact-credit{display:block;order:3;font-size:11px;line-height:1.4;color:#777;margin:10px 0 0}
+ .approach-section{padding-top:100px;padding-bottom:35px}.approach-grid h2{font-size:clamp(30px,8.5vw,52px)}.approach-grid .section-description{font-size:16px;line-height:1.45;margin:25px 0 38px}
+ .process-list li,.process-list li:first-child{grid-template-columns:48px 1fr;gap:16px;min-height:105px;padding:20px 0 22px}.process-list li>span{font-size:42px;font-weight:300}.process-list h3{font-size:20px;line-height:1.2;margin-bottom:7px}.process-list p{font-size:15px;line-height:1.4}.approach-grid .text-action{font-size:18px;margin-top:35px}
+ .founder-photo{display:block;aspect-ratio:1.36;overflow:hidden;background:#070707}.founder-photo img{height:100%;aspect-ratio:auto;object-fit:contain;transform:scale(1.14)}
+ .team-profile .founder-copy h3{font-size:29px;margin:22px 0 5px}.team-profile p:not(.demo-label){font-size:16px;line-height:1.4}.team-profile .founder-role{font-size:15px;margin-bottom:20px}.founder-role+p{padding:20px 0}.role-list{font-size:15px;padding-top:5px;gap:8px}.role-list li+li:before{margin-right:8px}
+ .founder-experience-detail{font-size:12px;margin:0 0 10px}.founder-experience-detail summary{min-height:26px}
+ .engagement-grid{margin-top:30px}.engagement-option>summary{min-height:60px;font-size:25px}.engagement-option>summary>span{font-size:30px}.team-format-action{display:inline-flex;font-size:20px;margin-top:24px}
+ .contact-section{padding-top:100px;padding-bottom:32px}.contact-grid h2{font-size:clamp(31px,8.7vw,53px)}.contact-grid .section-description{font-size:16px;line-height:1.4;margin:24px 0 30px}.contact-grid>.contact-copy>.contact-email{display:none}
+ .contact-grid input,.contact-grid textarea,.contact-grid select{font-size:16px;margin-bottom:18px;padding:10px 0 14px;min-height:44px}.contact-grid textarea{min-height:120px}.form-bottom{gap:12px}.form-bottom .send-button{font-size:18px;min-height:48px;padding:12px 16px}.form-bottom #delivery-note{font-size:12px;line-height:1.4}.site-footer{padding:20px 0 24px}.site-footer img{width:108px}
+}
+@media(max-width:700px) and (max-height:700px){.copy .reference-chapter h2{font-size:clamp(23px,7.3vw,30px)}}
+
+/* Calibrated against the wider native crop. Keep the building and pond visible. */
+html.animated .scene>canvas{transform:scale(1.1)}
+.contact-section{min-height:calc(100svh - 80px)}
+
+.process-list li>span{white-space:nowrap;font-variant-numeric:tabular-nums}
+@media(min-width:701px) and (min-height:501px){
+ .approach-section{padding-bottom:12svh}
+ .process-list li,.process-list li:first-child{min-height:120px;padding:24px 0}
+ .process-list h3{font-size:clamp(22px,2.5vw,38px)}
+ .process-list p{font-size:clamp(15px,1.4vw,22px)}
+ [data-panel=systems] .description{width:calc(100% + 70px);font-size:clamp(15px,1.4vw,22px)}
+}
+@media(max-width:700px){
+ .approach-section{padding-top:130px}
+ .process-list li,.process-list li:first-child{grid-template-columns:54px 1fr;min-height:112px}
+ .contact-section{padding-top:130px}
+ .contact-grid input,.contact-grid textarea,.contact-grid select{margin-bottom:24px}
+ .contact-grid textarea{min-height:160px}
+ .site-footer .language-switch a,.site-footer .language-switch>span{font-size:12px}
+}
+
+.scene figcaption span:nth-child(2){display:none}
+
+.process-disclaimer,.brand-system-note,.design-specimen figcaption,.project-visual figcaption,.form-bottom #delivery-note{color:#70736d}
+
+@media(min-width:701px) and (min-height:761px){
+ .copy .reference-chapter:is([data-panel=design],[data-panel=final]) h2{font-size:clamp(30px,min(4vw,6.4svh),64px)}
+}
+
+@media(max-width:700px) and (min-height:800px){
+ [data-panel=systems] .description{font-size:clamp(14px,3.4vw,20px)}
+ .copy-panel.reference-chapter[data-panel=systems] .crm-process li{min-height:5.6svh}
+}
+
+.reference-chapter .stage-flow li{color:var(--ink)}
+
+@media(max-width:700px){.crm-process li:not(:last-child):after{top:calc(.35em + 17px);bottom:0}}

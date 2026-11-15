@@ -1,5 +1,5 @@
 import {AEPencilCanvas} from './ae-pencil-canvas.mjs';
-import {fetchFrameBlob,decodeBlob} from './building-canvas.mjs?v=encoded-buffer-2';
+import {fetchFrameBlob,decodeBlob} from './building-canvas.mjs?v=reference-fit-v3';
 
 // The approved artwork is revealed by editable, exported AE trim paths.
 // Masking changes visibility only: no extra hatching is painted on the image.

@@ -1,5 +1,5 @@
 import {ENTRY_SHARE,joinStory} from './entry-timing.mjs';
-import {progressForFrame} from './intro-timeline.mjs';
+import {progressForFrame} from './intro-timeline.mjs?v=reference-fit-v3';
 const ranges=[[0,71],[72,135],[136,167],[168,191],[192,239]];
 const clamp=value=>Math.max(0,Math.min(1,Number(value)||0));
 function interpolate(points,value,key,result){

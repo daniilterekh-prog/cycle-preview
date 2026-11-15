@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  unicode-range: U+0030-0039;
+  src: url(inter-light-digits.ttf) format('truetype');
+}

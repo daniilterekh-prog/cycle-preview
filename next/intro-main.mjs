@@ -1,14 +1,14 @@
 import {loadReferencePencil,ReferencePencilCanvas} from './reference-pencil.mjs';
-import {createSceneRegistration} from './scene-registration.mjs?v=reference-rollout-v1';
+import {createSceneRegistration} from './scene-registration.mjs?v=reference-fit-v3';
 // One pinned scene on every viewport, as approved by the owner.
 import {splitProgress,joinStory,entryVisuals} from './entry-timing.mjs';
 import {createEntryTransition} from './entry-transition.mjs';
 import {FrameLoader} from './frame-loader.mjs?v=encoded-buffer-2';
-import {BuildingCanvas,fetchFrameBlob,decodeBlob} from './building-canvas.mjs?v=encoded-buffer-2';
+import {BuildingCanvas,fetchFrameBlob,decodeBlob} from './building-canvas.mjs?v=reference-fit-v3';
 import {EncodedFrames} from './encoded-frames.mjs?v=encoded-buffer-2';
 import {createScrollTimeline} from './scroll-timeline.mjs';
 import {stageForFrame,stages} from './stages.mjs';
-import {storyState,progressForFrame,solidOpacity} from './intro-timeline.mjs?v=encoded-buffer-2';
+import {storyState,progressForFrame,solidOpacity} from './intro-timeline.mjs?v=reference-fit-v3';
 import {PencilCanvas} from './pencil-canvas.mjs';
 import {AEPencilCanvas} from './ae-pencil-canvas.mjs';
 import {loadAEPencil} from './load-ae-pencil.mjs';
@@ -31,7 +31,7 @@ function rememberLocation(){if(!active||!layoutSnapshot||layoutSnapshot.width!==
 addEventListener('scroll',rememberLocation,{passive:true});
 const sectionAnchors=()=>[...document.querySelectorAll('main>.page-section,footer')].filter(el=>!el.hidden).map(el=>({id:el.id,top:scrollY+el.getBoundingClientRect().top})).filter(el=>el.id);
 function measureLayout(){layoutSnapshot={start:experience.offsetTop,end:experience.offsetTop+experience.offsetHeight-innerHeight,header:document.querySelector('.site-header').offsetHeight,anchors:sectionAnchors(),width:innerWidth,height:innerHeight};rememberLocation();}
-root.dataset.playerBuild='reference-rollout-v1';
+root.dataset.playerBuild='reference-fit-v3';
 const entry=createEntryTransition();
 function syncPoster(){poster.style.visibility=posterNeeded({pencilPainted:!!pencil,sketchOpacity:state.sketch,frame:renderer.last,solidOpacity:Number(canvas.style.opacity)})?'visible':'hidden';}
 function drawPencil(){if(active&&pencil&&state.sketch>0)pencil.draw(Math.max(state.draw,entryVisuals(entryProgress).ink));syncPoster();}
@@ -96,7 +96,7 @@ addEventListener('resize',()=>{const saved=stableLocation||captureLocation({y:sc
 document.fonts?.ready.then(()=>{registration.invalidate();if(active){timeline.refresh();measureLayout();update(journeyProgress);}});
 addEventListener('load',()=>{if(active)measureLayout();});
 document.addEventListener('toggle',()=>{if(active)measureLayout();},true);
-addEventListener('pagehide',()=>{loader?.close();encoded?.close();aborter?.abort();loader=null;profile=null;pencil?.release();});
+addEventListener('pagehide',()=>{loader?.close();encoded?.close();aborter?.abort();loader=null;profile=null;pencilAborter?.abort();pencil?.release();pencil=null;pencilPromise=null;pencilAborter=null;sketch.classList.remove('pencil-ready','pencil-loading');});
 addEventListener('pageshow',()=>{if(active){entry.refresh();timeline?.refresh();update(journeyProgress);}});
 for(const link of document.querySelectorAll('a[href="#hero"],a[href="#top"]'))link.addEventListener('click',event=>{if(!active)return;event.preventDefault();const hero=link.hash==='#hero';timeline.go(hero?0:joinStory(.205));history.replaceState(history.state,'',link.hash);if(hero)entry.focusHero();});
 function progressForStage(id){return id==='strategy'?joinStory(.205):joinStory(progressForFrame(stages.find(stage=>stage.id===id)?.end||0));}

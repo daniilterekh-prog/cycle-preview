@@ -1,5 +1,5 @@
 import {joinStory} from './entry-timing.mjs';
-import {progressForFrame} from './intro-timeline.mjs';
+import {progressForFrame} from './intro-timeline.mjs?v=reference-fit-v3';
 // Reading holds use completed states: sketch, structure, finish, garden, IT, final.
 export const stageStops=Object.freeze([0,joinStory(.205),...[71,135,167,191,239].map(frame=>joinStory(progressForFrame(frame)))]);
 export function snapStage(value,direction){

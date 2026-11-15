@@ -1,5 +1,11 @@
+// The reference finale settles lower and retains more architectural detail.
+export function framePlacement(w,h,iw,ih,index){
+ const t=Math.max(0,Math.min(1,(index-191)/48)),ease=t*t*t*(t*(t*6-15)+10);
+ const base=Math.min(w/iw,h/ih),ratio=base*(1+.15*ease);
+ return {ratio,x:(w-iw*ratio)/2,y:(h-ih*ratio)/2+ih*base*.12*ease};
+}
 export class BuildingCanvas{
- constructor(canvas){this.canvas=canvas;this.ctx=canvas.getContext('2d',{alpha:false});this.key='';this.last=-1;}
+ constructor(canvas){this.canvas=canvas;this.ctx=canvas.getContext('2d',{alpha:true});this.key='';this.last=-1;}
  resize(){
   const r=this.canvas.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,1.5),scale=Math.min(dpr,Math.sqrt(1200000/Math.max(1,r.width*r.height)));
   const w=Math.max(1,Math.round(r.width*scale)),h=Math.max(1,Math.round(r.height*scale)),key=w+'x'+h;
@@ -8,9 +14,9 @@ export class BuildingCanvas{
  draw(image,index){
   if(!this.ctx)return;
   this.resize();if(this.last===index)return;const {width:w,height:h}=this.canvas;
-  this.ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--paper').trim()||'#f7f6f3';this.ctx.fillRect(0,0,w,h);
-  const ratio=Math.min(w/image.width,h/image.height),iw=image.width*ratio,ih=image.height*ratio;
-  this.ctx.drawImage(image,(w-iw)/2,(h-ih)/2,iw,ih);this.last=index;this.canvas.classList.add('ready');
+  this.ctx.clearRect(0,0,w,h);this.ctx.imageSmoothingEnabled=true;this.ctx.imageSmoothingQuality='high';
+  const {ratio,x,y}=framePlacement(w,h,image.width,image.height,index),iw=image.width*ratio,ih=image.height*ratio;
+  this.ctx.drawImage(image,x,y,iw,ih);this.last=index;this.canvas.classList.add('ready');
  }
 }
 export async function fetchFrameBlob(url,signal){

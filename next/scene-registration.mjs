@@ -14,7 +14,7 @@ export function createSceneRegistration(root,scene,panels){
     const r=scene.getBoundingClientRect();boxes.push({x:r.x,y:r.y,w:r.width,h:r.height});
    }}finally{root.dataset.stage=saved;panels.forEach((p,i)=>p.classList.toggle('active',active[i]));}
    const x=Math.max(...boxes.map(r=>r.x)),y=Math.max(...boxes.map(r=>r.y));
-   box=innerWidth<=700?{x,y,w:Math.min(...boxes.map(r=>r.x+r.w))-x,h:Math.min(...boxes.map(r=>r.y+r.h))-y-30}:{...boxes[0],h:boxes[0].h-30};key=next;
+   box=innerWidth<=700?{x,y,w:Math.min(...boxes.map(r=>r.x+r.w))-x,h:Math.min(...boxes.map(r=>r.y+r.h))-y}:{...boxes[0],h:boxes[0].h-30};key=next;
   }
   const r=scene.getBoundingClientRect();for(const e of surfaces)Object.assign(e.style,{left:(box.x-r.x)+'px',top:(box.y-r.y)+'px',width:box.w+'px',height:Math.max(40,box.h)+'px'});
  },clear};
