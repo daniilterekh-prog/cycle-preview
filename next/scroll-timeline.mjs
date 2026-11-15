@@ -5,10 +5,11 @@ export function createScrollTimeline(element,onProgress){
  if(!gsap||!ScrollTrigger)throw Error('Scroll runtime unavailable');
  gsap.registerPlugin(ScrollTrigger);
  ScrollTrigger.config({ignoreMobileResize:true,autoRefreshEvents:'visibilitychange,DOMContentLoaded,load'});
+ const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
  const playhead={progress:0};let snapAllowed=false;
- const tween=gsap.to(playhead,{progress:1,ease:'none',onUpdate:()=>onProgress(playhead.progress),scrollTrigger:{trigger:element,start:'top top',end:'bottom bottom',scrub:.16,invalidateOnRefresh:true,onRefresh:self=>onProgress(self.progress),snap:{
+ const tween=gsap.to(playhead,{progress:1,ease:'none',onUpdate:()=>onProgress(playhead.progress),scrollTrigger:{trigger:element,start:'top top',end:'bottom bottom',scrub:motion.matches?true:.16,invalidateOnRefresh:true,onRefresh:self=>onProgress(self.progress),snap:{
   // Scrub may lag behind an explicit seek; snapping must use actual scroll.
-  snapTo:(_value,self)=>snapAllowed?snapStage(self.progress,self.direction):self.progress,
+  snapTo:(_value,self)=>snapAllowed&&!motion.matches?snapStage(self.progress,self.direction):self.progress,
   inertia:false,delay:.14,duration:{min:.65,max:1.5},ease:'power1.inOut',
   onComplete:()=>{snapAllowed=false;}
  }}});
@@ -22,11 +23,12 @@ export function createScrollTimeline(element,onProgress){
  function key(event){stopSnap();if(!interactive(event.target)&&['ArrowDown','ArrowUp','PageDown','PageUp',' '].includes(event.key))snapAllowed=true;}
  function click(event){if(interactive(event.target))stopSnap();}
  function pointer(event){if(event.pointerType==='mouse')stopSnap();}
+ motion.addEventListener('change',stopSnap);
  const listeners=[['wheel',wheel],['touchstart',touch],['keydown',key],['click',click],['pointerdown',pointer]];
  for(const [name,handler] of listeners)window.addEventListener(name,handler,{passive:true});
  return {
   refresh:()=>{stopSnap();ScrollTrigger.refresh();},
-  destroy:()=>{stopSnap();for(const [name,handler] of listeners)window.removeEventListener(name,handler);tween.scrollTrigger.kill();tween.kill();},
+  destroy:()=>{stopSnap();motion.removeEventListener('change',stopSnap);for(const [name,handler] of listeners)window.removeEventListener(name,handler);tween.scrollTrigger.kill();tween.kill();},
   go(progress){
    stopSnap();
    const trigger=tween.scrollTrigger;

@@ -6,7 +6,7 @@ import {createEntryTransition} from './entry-transition.mjs';
 import {FrameLoader} from './frame-loader.mjs?v=encoded-buffer-2';
 import {BuildingCanvas,fetchFrameBlob,decodeBlob} from './building-canvas.mjs?v=reference-fit-v3';
 import {EncodedFrames} from './encoded-frames.mjs?v=encoded-buffer-2';
-import {createScrollTimeline} from './scroll-timeline.mjs';
+import {createScrollTimeline} from './scroll-timeline.mjs?v=animation-boot-1';
 import {stageForFrame,stages} from './stages.mjs';
 import {storyState,progressForFrame,solidOpacity} from './intro-timeline.mjs?v=reference-fit-v3';
 import {PencilCanvas} from './pencil-canvas.mjs';
@@ -15,7 +15,7 @@ import {loadAEPencil} from './load-ae-pencil.mjs';
 import {imageProfile,posterNeeded,manifestURL} from './presentation.mjs?v=manifest-version-1';
 import {captureLocation,restoreLocation} from './resize-position.mjs';
 import {translator} from './language.mjs?v=story-access-1';
-import {createStoryMode} from './story-mode.mjs';
+import {createStoryMode} from './story-mode.mjs?v=animation-boot-1';
 import {showStillStory} from './still-story.mjs?v=versioned-stills-2';
 const t=translator();
 const root=document.documentElement,experience=document.querySelector('.experience'),canvas=document.querySelector('canvas'),poster=document.querySelector('.poster'),sketch=document.querySelector('.sketch-layer'),controls=document.querySelector('.controls'),slider=document.querySelector('#scrubber'),frameOutput=document.querySelector('#frame'),phase=document.querySelector('.phase'),error=document.querySelector('.error');
@@ -31,7 +31,7 @@ function rememberLocation(){if(!active||!layoutSnapshot||layoutSnapshot.width!==
 addEventListener('scroll',rememberLocation,{passive:true});
 const sectionAnchors=()=>[...document.querySelectorAll('main>.page-section,footer')].filter(el=>!el.hidden).map(el=>({id:el.id,top:scrollY+el.getBoundingClientRect().top})).filter(el=>el.id);
 function measureLayout(){layoutSnapshot={start:experience.offsetTop,end:experience.offsetTop+experience.offsetHeight-innerHeight,header:document.querySelector('.site-header').offsetHeight,anchors:sectionAnchors(),width:innerWidth,height:innerHeight};rememberLocation();}
-root.dataset.playerBuild='reference-fit-v3';
+root.dataset.playerBuild='animation-boot-1';
 const entry=createEntryTransition();
 function syncPoster(){poster.style.visibility=posterNeeded({pencilPainted:!!pencil,sketchOpacity:state.sketch,frame:renderer.last,solidOpacity:Number(canvas.style.opacity)})?'visible':'hidden';}
 function drawPencil(){if(active&&pencil&&state.sketch>0)pencil.draw(Math.max(state.draw,entryVisuals(entryProgress).ink));syncPoster();}
@@ -114,7 +114,7 @@ function restoreModeLocation(saved){
  else if(saved.kind==='hero'){scrollTo({top:0,behavior:'instant'});if(active)timeline.go(0);}
  else{const y=restoreLocation(saved,{start:experience.offsetTop,end:experience.offsetTop+experience.offsetHeight-innerHeight,anchors:[{id:'hero',top:0},...sectionAnchors()]});scrollTo({top:y,behavior:'instant'});if(active)update((y-experience.offsetTop)/(experience.offsetHeight-innerHeight));}
 }
-const modes=createStoryMode({preference:matchMedia('(prefers-reduced-motion: reduce)'),
+const modes=createStoryMode({
  loadManifest:async signal=>{const response=await fetch(manifestURL(import.meta.url),{signal});if(!response.ok)throw Error('Manifest unavailable');const data=await response.json();if(data.count!==240||!data.profiles?.[profileName()])throw Error('Invalid manifest');return data;},
  animate:data=>{manifest=data;activate();return deactivate;},
  still:reason=>{root.dataset.storyMode=reason;root.classList.add('story-static');root.classList.toggle('scene-failed',reason==='error');showStillStory(panels,{manifest,base:import.meta.url,frameRoot:root.dataset.frameRoot||'frames'});error.hidden=reason!=='error';if(reason==='error')error.querySelector('span').textContent=t('Не удалось загрузить анимацию. Все направления доступны ниже.');},
